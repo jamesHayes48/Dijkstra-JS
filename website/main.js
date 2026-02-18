@@ -1,15 +1,24 @@
-require("dotenv").config()
-
-const mapApiKey = process.env.MAPSKEY;
+//const mapApiKey = process.env.MAPSKEY;
 const centerCoordinates = { lat: 37.7749, lng: -122.4194 };
 
-const map = L.map('map').setView([centerCoordinates.lat, centerCoordinates.lng]);
-L.tileLayer(`https://maps.googleapis.com/maps/api/staticmap?center=${centerCoordinates.lat},
-    ${centerCoordinates.lng}&zoom=15&size=600x300&maptype=satellite&key=${mapApiKey}`, {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    maxZoom: 18,
-}).addTo(map);
+document.addEventListener("DOMContentLoaded", function () {
 
+    const centerCoordinates = { lat: 37.7749, lng: -122.4194 };
+
+    const map = L.map('map').setView(
+        [centerCoordinates.lat, centerCoordinates.lng], 
+        13
+    );
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 10
+    }).addTo(map);
+
+});
+
+
+L.map('map').setView([lat, lang], 13);
+/*
 async function fetchStreetData() {
     const params = `
         [out:json];
@@ -20,7 +29,7 @@ async function fetchStreetData() {
         out body;
     `;
 
-    const response = await fetch(`http://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
+    const response = await fetch(`http://overpass-api.de/api/interpreter?data=${encodeURIComponent(params)}`);
     const data = await response.json();
     return data;
 }
@@ -43,7 +52,7 @@ function buildGraph(data){
     return graph;
 }
 
-function dijkstra(){
+function dijkstra(graph, start, end){
     const distances = {};
     const previous = {};
     const queue = new Set();
@@ -80,3 +89,4 @@ function dijkstra(){
     return path.length ? path : null;
 
 }
+*/
